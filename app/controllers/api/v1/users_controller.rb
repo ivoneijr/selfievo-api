@@ -44,7 +44,6 @@ class API::V1::UsersController < ApplicationController
 
   def signin
     @signin = SignIn.new(signin_params)
-
     if @signin.save
       render json: @signin, status: :created
     else

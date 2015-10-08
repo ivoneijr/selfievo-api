@@ -11,8 +11,8 @@ Rails.application.routes.draw do
         collection do
           post :signin
           post :retrieve_password, :path => '/retrieve-password'
-          get :me
-          get :activation
+          get  :me
+          get  :activation
         end
       end
     end
