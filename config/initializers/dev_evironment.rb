@@ -4,4 +4,3 @@ unless Rails.env.production?
 else
 	ENV['APPLICATION_URL'] = "mysterious-spire-8112.herokuapp.com"
 end
-

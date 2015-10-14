@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   before_create :set_token
   after_create :send_activation_mail
 
+  belongs_to :person
+  belongs_to :address
+
   validates :username, :email, :password, presence: true
   validates :username, :email, uniqueness: true
   validates :username, length: { in: 6..20 }
