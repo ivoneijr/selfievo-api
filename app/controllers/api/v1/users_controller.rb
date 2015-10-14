@@ -9,7 +9,8 @@ class API::V1::UsersController < ApplicationController
 
   def show
     if @user
-      render json: @user
+      # service_instances: [service:[:type]]
+      render json: @user.as_json({include: :person})
     else
       render json: {message: 'Not found'}, status: :not_found
     end

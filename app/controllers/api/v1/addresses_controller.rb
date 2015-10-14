@@ -1,4 +1,4 @@
-class AddressesController < ApplicationController
+class API::V1::AddressesController < ApplicationController
   before_action :set_address, only: [:show, :update, :destroy]
 
   # GET /addresses

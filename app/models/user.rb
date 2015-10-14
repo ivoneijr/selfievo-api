@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   after_create :send_activation_mail
 
   belongs_to :person
-  belongs_to :address
 
   validates :username, :email, :password, presence: true
   validates :username, :email, uniqueness: true
@@ -19,7 +18,7 @@ class User < ActiveRecord::Base
         :username,
         :email,
         :created_at,
-        :updated_at,
+        :updated_at
       ]
     }.merge(options))
   end

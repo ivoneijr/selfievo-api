@@ -11,13 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014025843) do
+ActiveRecord::Schema.define(version: 20151014034530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "people", force: :cascade do |t|
+  create_table "addresses", force: :cascade do |t|
+    t.string   "street"
+    t.integer  "number"
+    t.string   "neighborhood"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "complement"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "people", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.string   "last_name"
     t.date     "birth_date"
@@ -25,15 +37,18 @@ ActiveRecord::Schema.define(version: 20151014025843) do
     t.string   "sex"
     t.string   "phone"
     t.string   "type"
+    t.uuid     "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "people", ["address_id"], name: "index_people_on_address_id", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "username"
     t.string   "email"
     t.string   "password"
-    t.integer  "person_id"
+    t.uuid     "person_id"
     t.string   "token"
     t.string   "activation_token"
     t.boolean  "activated",                  default: false
@@ -45,7 +60,5 @@ ActiveRecord::Schema.define(version: 20151014025843) do
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end
-
-  add_index "users", ["person_id"], name: "index_users_on_person_id", using: :btree
 
 end

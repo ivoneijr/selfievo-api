@@ -5,8 +5,7 @@ class CreateUsers < ActiveRecord::Migration
      t.string :email, unique: true
      t.string :password
 
-     t.belongs_to :person,  index: true
-     t.belongs_to :address, index: true
+     t.uuid :person_id
 
      t.string :token, unique: true
      t.string :activation_token

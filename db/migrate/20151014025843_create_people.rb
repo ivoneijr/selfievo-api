@@ -8,6 +8,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :sex
       t.string :phone
       t.string :type
+      t.uuid :address_id, index: true
 
       t.timestamps null: false
     end
