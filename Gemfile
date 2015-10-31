@@ -23,6 +23,9 @@ gem 'activemodel-errors-tree', '~> 0.1.0'
 # JSON Web Token implementation in Ruby
 gem 'jwt', '~> 1.5.1'
 
+# Automatically generate an entity-relationship diagram (ERD) for your Rails models.
+gem 'rails-erd', '~> 1.4.2'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

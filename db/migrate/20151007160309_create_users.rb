@@ -4,12 +4,10 @@ class CreateUsers < ActiveRecord::Migration
      t.string :username, unique: true
      t.string :email, unique: true
      t.string :password
-
-     t.uuid :person_id
-
      t.string :token, unique: true
      t.string :activation_token
-     t.boolean :activated, default: false
+     t.boolean :active, default: false
+     t.uuid :person_id
      t.datetime :current_sign_in_at
      t.datetime :last_sign_in_at
      t.datetime :last_password_retrieval_at

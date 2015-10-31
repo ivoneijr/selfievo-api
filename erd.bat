@@ -1,0 +1,1 @@
+rake erd polymorphism=true orientation=vertical attributes=primary_keys,foreign_keys,content prepend_primary=true indirect=false exclude=ActiveType::Record filename=docs/accounts title="Accounts" filetype=png

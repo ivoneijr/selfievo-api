@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
         :username,
         :email,
         :created_at,
-        :updated_at
+        :updated_at,
       ]
     }.merge(options))
   end
@@ -31,12 +31,8 @@ class User < ActiveRecord::Base
     self.save
   end
 
-  def activation_url
-    "http://127.0.0.1:3000/api/v1/users/activation?activation_token="+self.activation_token.to_s
-  end
-
-  def active
-    self.activated = true
+  def activate
+    self.active = true
     self.save
   end
 
