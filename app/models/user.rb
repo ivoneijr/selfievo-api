@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   before_create :set_token
   after_create :send_activation_mail
 
-  belongs_to :person
+  has_one :person
+  accepts_nested_attributes_for :person, allow_destroy: true
 
   validates :username, :email, :password, presence: true
   validates :username, :email, uniqueness: true

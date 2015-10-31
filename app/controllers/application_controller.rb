@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::API
-
   include ActionController::HttpAuthentication::Token::ControllerMethods
-	before_action :authenticate
+  before_action :authenticate
 
-	protected
+  protected
 
     def authenticate
       authenticate_token || render_unauthorized
@@ -14,8 +13,8 @@ class ApplicationController < ActionController::API
 
         begin
           @authenticated = User.find_by(token: token)
-          unless @authenticated.activated
-            render_not_activated
+          unless @authenticated.active
+            render_not_active
           else
             @authenticated
           end
@@ -31,8 +30,8 @@ class ApplicationController < ActionController::API
       render json: {message: 'Bad credentials'}, status: :unauthorized
     end
 
-    def render_not_activated
-      render json: {message: 'User not activated'}, status: :unauthorized
+    def render_not_active
+      render json: {message: 'User not active'}, status: :unauthorized
     end
 
 end

@@ -1,7 +1,7 @@
 class CreateAddresses < ActiveRecord::Migration
   def change
-
-    create_table :addresses do |t|
+    create_table :addresses, id: :uuid  do |t|
+      t.uuid :person_id, index: true
       t.string :street
       t.integer :number
       t.string :neighborhood

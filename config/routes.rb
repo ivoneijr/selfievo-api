@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  
-  namespace :api, defaults: { format: 'json', except: [:new, :edit] } do
+
+  namespace :api, defaults: { format: 'json', except: [:new] } do
     namespace :v1 do
       resources :users do
         collection do

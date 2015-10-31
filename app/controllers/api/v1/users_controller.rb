@@ -9,7 +9,7 @@ class API::V1::UsersController < ApplicationController
 
   def show
     if @user
-      render json: @user
+      render json: @user.as_json({include:[person:{include:[:address]}]})
     else
       head 404
     end
@@ -27,7 +27,7 @@ class API::V1::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      render json: @user, status: 200
+      head 200
     else
       render json: { errors: @user.errors }, status: 422
     end
@@ -39,14 +39,14 @@ class API::V1::UsersController < ApplicationController
   end
 
   def me
-    render json: @authenticated
+    render json: @authenticated, status: 200
   end
 
   def signin
     @signin = SignIn.new(signin_params)
 
     if @signin.save
-      render json: @signin, status: :created
+      render json: @signin, status: 200
     else
       render json: { errors: @signin.errors }, status: 422
     end
@@ -87,8 +87,38 @@ class API::V1::UsersController < ApplicationController
       params.require(:user).permit(:username, :password, :remote_ip)
     end
 
+# specialty_fields_attributes: [:id, :job_id, :avatar, :_destroy])
+
     def user_params
-      params.require(:user).permit(:username, :password, :email)
+      p '@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+      p params
+      p '@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+
+      params.require(:user).permit(:username, :password, :email, :_destroy,
+        person_attributes: [
+          :id,
+          :user_id,
+          :name,
+  	      :last_name,
+  	      :birth_date,
+  	      :registry,
+  	      :sex,
+  	      :phone,
+  	      :type,
+          :_destroy,
+          address_attributes: [
+            :id,
+            :person_id,
+            :street,
+    	      :number,
+    	      :neighborhood,
+    	      :city,
+    	      :state,
+    	      :zip,
+    	      :complement,
+            :_destroy
+          ]
+        ])
     end
 
 end

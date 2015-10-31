@@ -1,6 +1,9 @@
 class Person < ActiveRecord::Base
-	has_one :user
-	belongs_to :address
+	# has_one :user
+	# belongs_to :address
+	belongs_to :user
+	has_one :address
+	accepts_nested_attributes_for :address, allow_destroy: true
 
 	def serializable_hash(options = {})
     super({

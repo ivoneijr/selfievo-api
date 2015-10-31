@@ -47,4 +47,5 @@ Rails.application.configure do
     :user_name => "postmaster@sandboxd3f895fff78e45078a1d141df117b1fd.mailgun.org",
     :password => "082737094f11aab0db4c5e7692e1b544"
   }
+  config.action_mailer.default_url_options = { :host => "localhost:3000" }
 end

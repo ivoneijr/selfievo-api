@@ -17,7 +17,8 @@ ActiveRecord::Schema.define(version: 20151014034530) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "addresses", force: :cascade do |t|
+  create_table "addresses", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "person_id"
     t.string   "street"
     t.integer  "number"
     t.string   "neighborhood"
@@ -29,7 +30,10 @@ ActiveRecord::Schema.define(version: 20151014034530) do
     t.datetime "updated_at",   null: false
   end
 
+  add_index "addresses", ["person_id"], name: "index_addresses_on_person_id", using: :btree
+
   create_table "people", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "user_id"
     t.string   "name"
     t.string   "last_name"
     t.date     "birth_date"
@@ -37,21 +41,19 @@ ActiveRecord::Schema.define(version: 20151014034530) do
     t.string   "sex"
     t.string   "phone"
     t.string   "type"
-    t.uuid     "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "people", ["address_id"], name: "index_people_on_address_id", using: :btree
+  add_index "people", ["user_id"], name: "index_people_on_user_id", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "username"
     t.string   "email"
     t.string   "password"
-    t.uuid     "person_id"
     t.string   "token"
     t.string   "activation_token"
-    t.boolean  "activated",                  default: false
+    t.boolean  "active",                     default: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.datetime "last_password_retrieval_at"

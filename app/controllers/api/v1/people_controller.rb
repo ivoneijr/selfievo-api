@@ -5,7 +5,6 @@ class API::V1::PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all
-
     render json: @people
   end
 

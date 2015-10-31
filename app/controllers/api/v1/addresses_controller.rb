@@ -5,7 +5,6 @@ class API::V1::AddressesController < ApplicationController
   # GET /addresses.json
   def index
     @addresses = Address.all
-
     render json: @addresses
   end
 
