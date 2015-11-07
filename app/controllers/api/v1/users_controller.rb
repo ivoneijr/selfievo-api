@@ -92,9 +92,9 @@ class API::V1::UsersController < ApplicationController
     def user_params
       p '@@@@@@@@@@@@@@@@@@@@@@@@@@@'
       p params
-      p '@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+      p '@@@@@@@@@@@@@@@@@@@@@@@@@@@asdasd'
 
-      params.require(:user).permit(:username, :password, :email, :_destroy,
+      params.require(:user).permit(:id,:username, :password, :email, :_destroy,
         person_attributes: [
           :id,
           :user_id,
